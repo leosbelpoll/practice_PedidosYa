@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
 import './App.css';
 
+import Dashboard from "./components/Dashboard";
+import RestaurantList from "./components/Restaurant/List";
+import RestaurantDetail from "./components/Restaurant/Detail";
+import NotFound from "./components/NotFound";
+import Header from "./components/Header";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Header />
+            <main>
+                <Switch>
+                    <Route exact path="/" component={Dashboard}/>
+                    <Route exact path="/restaurants" component={RestaurantList}/>
+                    <Route exact path="/restaurants/:id" component={RestaurantDetail}/>
+
+                    <Route component={NotFound} />
+                </Switch>
+            </main>
+        </Router>
+    );
 }
 
 export default App;
